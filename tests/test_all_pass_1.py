@@ -10,13 +10,6 @@ def test_pass_2():
     with allure.step("Проверяем длину строки"):
         assert len("pytest") == 6
 
-def test_pass_3():
-    with allure.step("Все ок, true == true"):
-        assert True is True
-
-def test_pass_4():
-    with allure.step("Сравнение чисел"):
-        assert 10 > 5
 
 def test_pass_5():
     with allure.step("Проверяем список"):

@@ -1,4 +1,5 @@
 import pytest
+import allure
 
 @pytest.mark.skip
 def test_skipped1():
