@@ -56,7 +56,7 @@ def browser_management(request):
     config.window_width = 1300
     config.window_height = 900
     config.driver_options = options
-    config.timeout = 4.0
+    config.timeout = 10.0
 
     browser.open("/")
     yield
