@@ -52,7 +52,7 @@ def browser_management(request):
 
     # Selene config
     config.browser_name = selene_browser_name
-    config.base_url = "https://www.jenkins.io/"
+    config.base_url = "https://www.jenkins.io"
     config.window_width = 1300
     config.window_height = 900
     config.driver_options = options
