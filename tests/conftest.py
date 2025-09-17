@@ -1,5 +1,6 @@
 import pytest
-import os
+import allure
+
 from selene import browser
 from selene.support.shared import config
 from selenium import webdriver
@@ -10,12 +11,16 @@ def pytest_addoption(parser):
     parser.addoption("--headless", action="store_true",
                      help="Run in headless mode")
 
+# add browser info to allure report
+@pytest.hookimpl(tryfirst=True)
+def pytest_runtest_setup(item):
+    browser = item.config.getoption("--browser")
+    allure.dynamic.tag(browser)
+
 @pytest.fixture(scope='session', autouse=True)
 def browser_management(request):
     browser_name = request.config.getoption("--browser")
-    headless_env = os.environ.get("HEADLESS", "").lower() in ["1", "true", "yes"]
-    headless_cli = request.config.getoption("--headless")
-    headless = headless_env or headless_cli
+    headless = request.config.getoption("--headless")
 
     drivers = {
         "chrome": (
@@ -47,12 +52,29 @@ def browser_management(request):
 
     # Selene config
     config.browser_name = selene_browser_name
-    config.base_url = "https://demoqa.com/automation-practice-form"
-    config.window_width = 1500
-    config.window_height = 1024
+    config.base_url = "https://www.jenkins.io/"
+    config.window_width = 1300
+    config.window_height = 900
     config.driver_options = options
     config.timeout = 4.0
 
     browser.open("/")
     yield
+
+    if browser_name == "chrome":
+        log_text = "".join(f'{text}\n' for text in browser.driver.get_log(log_type='browser'))
+        allure.attach(
+                      log_text,
+                      name = 'Web Browser logs',
+                      attachment_type=allure.attachment_type.TEXT,
+                      extension='.log',
+                      )
+    
+    html = browser.driver.page_source
+    allure.attach(
+                  html,
+                  name = 'Page Source',
+                  attachment_type=allure.attachment_type.HTML,
+                  extension='.html')
+    
     browser.quit()
