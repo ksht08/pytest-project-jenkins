@@ -19,12 +19,21 @@ def test_jenkins_docpage():
             attachment_type=allure.attachment_type.PNG,
         )
 
-    with allure.step("Open and check 'User Handbook Overview' from left menu"):
+    with allure.step("Open 'User Handbook Overview' article from left menu"):
         jenkins_doc_page.left_menu_click("User Handbook Overview")
         allure.attach(
             browser.driver.get_screenshot_as_png(),
-            name="User Handbook Overview",
+            name="User Handbook Overview article",
             attachment_type=allure.attachment_type.PNG,
         )
         
-    time.sleep(1)
+    with allure.step("Check 'User Handbook Overview' article"):
+        jenkins_doc_page.left_menu_check_article(
+            "User Handbook Overview",
+            "This page provides an overview of the documentation in the Jenkins User Handbook."
+            )
+        allure.attach(
+            browser.driver.get_screenshot_as_png(),
+            name="User Handbook Overview article text",
+            attachment_type=allure.attachment_type.PNG,
+        )
