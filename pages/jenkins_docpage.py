@@ -17,8 +17,8 @@ class JenkinsDocpage():
 
     def left_menu_click(self, value):
         menu_item = browser.all("#sidebar-content > ul > li")
-        menu_item.element_by(have.exact_text(value)).click()
-        browser.should(have.url_containing("book/getting-started/"))
+        menu_item.element_by(have.text(value)).click()
         browser.element("h1").should(be.visible).should(have.text(value))
+        browser.should(have.url_containing("book/getting-started/"))
         
         return self
