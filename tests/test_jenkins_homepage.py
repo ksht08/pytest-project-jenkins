@@ -1,4 +1,3 @@
-import time
 import allure
 from selene import browser
 from pages.jenkins_homepage import JenkinsHomepage
