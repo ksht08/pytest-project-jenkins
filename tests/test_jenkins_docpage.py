@@ -20,7 +20,7 @@ def test_jenkins_docpage():
         )
 
     with allure.step("Open 'User Handbook Overview' article from left menu"):
-        jenkins_doc_page.left_menu_click("User Handbook Overview")
+        jenkins_doc_page.left_menu_click()
         allure.attach(
             browser.driver.get_screenshot_as_png(),
             name="User Handbook Overview article",
