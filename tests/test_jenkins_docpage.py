@@ -19,7 +19,12 @@ def test_jenkins_docpage():
             attachment_type=allure.attachment_type.PNG,
         )
 
-    with allure.step("Check recent posts section"):
+    with allure.step("Open and check 'User Handbook Overview' from left menu"):
         jenkins_doc_page.left_menu_click("User Handbook Overview")
+        allure.attach(
+            browser.driver.get_screenshot_as_png(),
+            name="User Handbook Overview",
+            attachment_type=allure.attachment_type.PNG,
+        )
         
     time.sleep(1)

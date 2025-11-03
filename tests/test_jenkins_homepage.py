@@ -20,6 +20,10 @@ def test_jenkins_homepage():
         )
 
     with allure.step("Check recent posts section"):
-        jenkins_home_page.recent_posts_section("Enforced HTTPS for Update Center")
-        
-    time.sleep(2)
+        jenkins_home_page.recent_posts_section("Revamped Tests UI in Jenkins")
+        allure.attach(
+            browser.driver.get_screenshot_as_png(),
+            name="recent posts section",
+            attachment_type=allure.attachment_type.PNG,
+        )
+    
